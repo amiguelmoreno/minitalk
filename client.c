@@ -6,7 +6,7 @@
 /*   By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:38:44 by antmoren          #+#    #+#             */
-/*   Updated: 2022/06/15 20:02:42 by antmoren         ###   ########.fr       */
+/*   Updated: 2022/06/22 20:25:40 by antmoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,39 +17,82 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void	send_bit(int pid, char *str, size_t len)
-{
-	int		shift;
-	size_t	i;
+#define RED "\033[0;31m"
+#define GREEN "\033[0;32m"
+#define YELLOW "\033[0;33m"
+#define END "\033[0m"
 
-	i = 0;
-	while (i <= len)
+void	signal_error(void)
+{
+	ft_printf("\n%sclient: unexpected error.%s\n", RED, END);
+	exit(EXIT_FAILURE);
+}
+
+void	char_to_bin(unsigned char c, int pid)
+{
+	int	bit;
+
+	bit = 0;
+	while (bit < 8)
 	{
-		shift = 0;
-		while (shift < 7)
+		if (c & 128)
 		{
-			if ((str[i] >> shift) & 1)
-				kill(pid, SIGUSR2);
-			else
-				kill(pid, SIGUSR1);
-			shift++;
-			usleep(300);
+			if (kill(pid, SIGUSR2) == -1)
+				signal_error();
 		}
-		i++;
+		else
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				signal_error();
+		}
+		c <<= 1;
+		bit++;
+		pause();
+		usleep(100);
 	}
 }
 
-int	main(int argc, char **argv)
+void	sent_text(char *str, int pid)
 {
-	int		pid;
-	char	*str;
+	int	i;
 
-	if (argc == 3)
+	i = 0;
+	while (str[i])
+		char_to_bin(str[i++], pid);
+	char_to_bin('\0', pid);
+}
+
+void	recieved(int sig)
+{
+	static int	sent;
+
+	if (sig == SIGUSR1)
 	{
-		pid = ft_atoi(argv[1]);
-		str = argv[2];
-		send_bit(pid, str, ft_strlen(str));
+		ft_printf("%s%d signal sent successfully!%s\n", GREEN, ++sent, END);
+		exit(EXIT_SUCCESS);
+	}
+	if (sig == SIGUSR2)
+		++sent;
+}
+
+int	main(int ac, char **av)
+{
+	int	server_pid;
+	int	client_pid;
+
+	client_pid = getpid();
+	if (ac == 3)
+	{
+		ft_printf("%sclient pid: %d%s\n", RED, client_pid, END);
+		signal(SIGUSR1, recieved);
+		signal(SIGUSR2, recieved);
+		server_pid = ft_atoi(av[1]);
+		ft_printf("%sText currently sending.. %s\n", YELLOW, END);
+		sent_text(av[2], server_pid);
 	}
 	else
-		ft_printf("\nYOU EITHER LEFT IT BLANK OR ARE DOING MORE THAN 1 WORD\n\n");
+		ft_printf("%susage: ./client <server_pid> <text to send>%s\n",
+					RED,
+					END);
+	return (EXIT_FAILURE);
 }

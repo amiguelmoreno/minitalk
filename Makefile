@@ -6,7 +6,7 @@
 #    By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 16:38:41 by antmoren          #+#    #+#              #
-#    Updated: 2022/06/17 10:03:18 by antmoren         ###   ########.fr        #
+#    Updated: 2022/06/22 19:26:34 by antmoren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ all:
 	@make -s -C $(PRINTF)
 	@gcc $(FLAGS) server.c -o $(SERVER)
 	@gcc $(FLAGS) client.c -o $(CLIENT)
-	@echo "Server And Client files have been generated!"
+	@echo "Server And Client files generated!"
 
 clean:
 	@make clean -s -C $(PRINTF)
