@@ -6,7 +6,7 @@
 /*   By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 16:34:36 by antmoren          #+#    #+#             */
-/*   Updated: 2022/05/06 10:17:06 by antmoren         ###   ########.fr       */
+/*   Updated: 2022/11/17 23:38:59 by antmoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,23 @@ char	*ft_strrchr(const char *s, int c)
 	while (i >= 0)
 	{
 		if (s[i] == (char)c)
-			return ((char *)(s + i));
+			return ((char *)&s[i]);
 		i--;
 	}
 	return (NULL);
 }
 
-/*
+/* 
 #include <stdio.h>
 #include <string.h>
-int main (void)
+int	main(void)
 {
-    const char *str;
-	int	c;
+	const char	*str;
+	int			c;
 
-    
-    str = "me voy a caer de la mesa";
-    c = 'w';
-    printf("%s\n", strrchr(str, c));
-    printf("%s\n", ft_strrchr(str, c));
-    return (0);
-}
-*/
+	str = "me voy a caer de la mesa";
+	c = 'd';
+	printf("%s\n", strrchr(str, c));
+	printf("%s\n", ft_strrchr(str, c));
+	return (0);
+} */

@@ -6,7 +6,7 @@
 /*   By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 13:31:24 by antmoren          #+#    #+#             */
-/*   Updated: 2022/05/06 09:57:47 by antmoren         ###   ########.fr       */
+/*   Updated: 2022/11/15 00:14:45 by antmoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*ft_memmove(void *dst, const void *src, size_t n)
 	size_t	i;
 
 	i = 0;
+	if (!dst && !src)
+		return (NULL);
 	if (dst == src || !n)
 		return (dst);
 	if (dst < src)

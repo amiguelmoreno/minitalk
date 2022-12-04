@@ -6,7 +6,7 @@
 /*   By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 13:32:34 by antmoren          #+#    #+#             */
-/*   Updated: 2022/05/06 09:56:48 by antmoren         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:37:35 by antmoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
-		return (c - 32);
+		return (c - ('z' - 'Z'));
 	else
 		return (c);
 }

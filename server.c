@@ -6,52 +6,47 @@
 /*   By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:38:38 by antmoren          #+#    #+#             */
-/*   Updated: 2022/11/11 22:12:47 by antmoren         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:35:26 by antmoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static void	handler(int signal)
+void	ft_handler(int signal)
 {
-	static char	c = 0;
-	static int	pos = 0;
-	int			bit;
+	static int	bit;
+	static int	i;
 
 	if (signal == SIGUSR1)
-		bit = 0;
-	else if (signal == SIGUSR2)
-		bit = 1;
-	else
-		exit(EXIT_FAILURE);
-	c += bit << pos++;
-	if (pos == 7)
+		i |= (0x01 << bit);
+	bit++;
+	if (bit == 8)
 	{
-		if (!c)
-			c = '\n';
-		ft_putchar_fd(c, 1);
-		c = 0;
-		pos = 0;
+		ft_printf("%c", i);
+		bit = 0;
+		i = 0;
 	}
 }
 
-static void	set_handlers(void)
+int	main(int argc, char **argv)
 {
-	struct sigaction	act;
+	int	pid;
 
-	act.sa_handler = handler;
-	sigemptyset(&act.sa_mask);
-	act.sa_flags = 0;
-	sigaction(SIGUSR1, &act, NULL);
-	sigaction(SIGUSR2, &act, NULL);
-}
-
-int	main(void)
-{
-	set_handlers();
-	ft_putstr_fd("Server running: PID: ", 1);
-	ft_putnbr_fd(getpid(), 1);
-	ft_putstr_fd("\n", 1);
-	while (42)
+	(void)argv;
+	if (argc != 1)
+	{
+		ft_printf("\033[91mError: wrong format.\033[0m\n");
+		ft_printf("\033[33mTry: ./server\033[0m\n");
+		return (0);
+	}
+	pid = getpid();
+	ft_printf("\033[94mPID\033[0m \033[96m->\033[0m %d\n", pid);
+	ft_printf("\033[90mWaiting for a message...\033[0m\n");
+	while (argc == 1)
+	{
+		signal(SIGUSR1, ft_handler);
+		signal(SIGUSR2, ft_handler);
 		pause();
+	}
+	return (0);
 }

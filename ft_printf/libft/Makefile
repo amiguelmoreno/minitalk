@@ -6,13 +6,22 @@
 #    By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 10:11:34 by antmoren          #+#    #+#              #
-#    Updated: 2022/05/06 09:57:15 by antmoren         ###   ########.fr        #
+#    Updated: 2022/11/18 14:31:55 by antmoren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# GENERAL CONFIG
+
 NAME = libft.a
 
-SRCS	=	ft_isalnum.c	\
+CC		=	gcc
+CFLAGS	=	-Wall -Wextra -Werror
+RM		=	/bin/rm -f
+LIB1	= 	ar -rcs
+LIB2	= 	ranlib
+
+# MANDATORY FUNCTIONS
+SRCS_MAND	=	ft_isalnum.c	\
 			ft_isalpha.c 	\
 			ft_isascii.c 	\
 			ft_isdigit.c	\
@@ -47,53 +56,59 @@ SRCS	=	ft_isalnum.c	\
 			ft_strmapi.c 	\
 			ft_striteri.c 	\
 
-SRCS_BONUS =	ft_lstnew_bonus.c		\
-				ft_lstadd_front_bonus.c \
-				ft_lstsize_bonus.c 		\
-				ft_lstlast_bonus.c 		\
-				ft_lstadd_back_bonus.c 	\
-				ft_lstdelone_bonus.c 	\
-				ft_lstclear_bonus.c 	\
-				ft_lstiter_bonus.c  	\
-				ft_lstmap_bonus.c 		\
-				
 
-OBJS	=	${SRCS:.c=.o}
-# Indica que para cada archivo .c tiene que haber un archivo .o
+# BONUS FUNCTIONS
+SRCS_BONUS =	ft_lstnew.c			\
+				ft_lstadd_front.c 	\
+				ft_lstsize.c 		\
+				ft_lstlast.c 		\
+				ft_lstadd_back.c 	\
+				ft_lstdelone.c 		\
+				ft_lstclear.c 		\
+				ft_lstiter.c  		\
+				ft_lstmap.c 		\
 
+
+# Takes the variable value ${SRCS_MAND} or ${SRCS_BONUS}, which is a string composed of words separated by spaces, and for each word, replace the suffix .c with .o
+OBJS_MAND	=	${SRCS_MAND:.c=.o}
 OBJS_BONUS	=	${SRCS_BONUS:.c=.o}
-# Indica que para cada archivo .c tiene que haber un archivo .o
 
-CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror
-RM		=	rm -f
-AR 		= 	ar rcs
+# RULES
+# 1. "Your Makefile must at least contain the rules $(NAME), all, clean, fclean and re."
+# 2. Compile the sources (*.c) to object files (*.o)
+# 3. Then generate a library file and index it
+# 4. 'nm libft.a' to check content
+
+
+$(NAME)	:	$(OBJS_MAND)
+			$(LIB1) $(NAME) $(OBJS_MAND)
+			$(LIB2) $(NAME)
 
 all: ${NAME}
-# Hace todas las reglas y subreglas 
 
-${NAME} : ${OBJS}
-	$(AR) ${NAME} ${OBJS}
-# Crea la librería (libft.a)
-
-bonus: $(OBJS) $(OBJS_BONUS)
-	$(AR) $(NAME) $?
-
-%o: %.c 
+# Sample:
+# 	gcc -Wall -Wextra -Werror -c ft_isalpha.c -o ft_isalpha.o
+#	-c				Only run preprocess, compile, and assemble steps
+#	-o <file>		Write output to <file>
+#	$< and $@		https://www.gnu.org/software/make/manual/make.html#Automatic-Variables
+%.o: %.c 
 	${CC} ${CFLAGS} -c $< -o $@
-# Transforma los archivos .c en .o y cambia el nombre del output para los archivos .o
 
+# Clean all the output files (*.o)
 clean: 
-	${RM} ${OBJS} ${OBJS_BONUS}
-# Borra los ejecutables de las funciones
+	${RM} ${OBJS_MAND} ${OBJS_BONUS}
 
+# Clean all the output files (*.o) and the library file
 fclean: clean
 	${RM} ${NAME}
-# Borra los ejecutables de las funciones y de la librería
 
+
+# Clean object files (*.o) and the binary file; 
 re: fclean all
-# Resetea la carpeta, es decir, borra los ejecutables creados y los crea de nuevo
+
+bonus	:	$(OBJS_BONUS)
+			@make OBJS_MAND="$(OBJS_MAND) $(OBJS_BONUS)" $(NAME)
 
 .PHONY:	all bonus clean fclean re
-# Sirve para que las reglas funcionen correctamente aunque haya archivos con el mismo nombre 
+
 

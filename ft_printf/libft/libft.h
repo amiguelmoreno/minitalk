@@ -6,7 +6,7 @@
 /*   By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:08:33 by antmoren          #+#    #+#             */
-/*   Updated: 2022/05/06 09:57:20 by antmoren         ###   ########.fr       */
+/*   Updated: 2022/11/15 01:16:03 by antmoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char				*ft_strnstr(const char *big, const char *little,
 //https://www.freebsd.org/cgi/man.cgi?query=strnstr&sektion=3
 void				ft_bzero(void *s, size_t n);
 //https://man7.org/linux/man-pages/man3/bzero.3.html
-void				*ft_memset(void *str, int c, size_t n);
+void				*ft_memset(void *str, int c, size_t len);
 // https://www.tutorialspoint.com/c_standard_library/c_function_memset.htm
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 // https://www.tutorialspoint.com/c_standard_library/c_function_memcpy.htm

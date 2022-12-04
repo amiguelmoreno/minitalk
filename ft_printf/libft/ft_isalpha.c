@@ -6,7 +6,7 @@
 /*   By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:49 by antmoren          #+#    #+#             */
-/*   Updated: 2022/05/06 09:55:50 by antmoren         ###   ########.fr       */
+/*   Updated: 2022/11/14 14:00:43 by antmoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 int	ft_isalpha(int c)
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-		return (1);
-	else
-		return (0);
+	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
 }
-/*
-#include <ctype.h>
+
+/* #include <ctype.h>
 #include <stdio.h>
 
 int	main(void)
@@ -31,4 +28,4 @@ int	main(void)
 	printf("%d\n", ft_isalpha(c));
 	printf("%d\n", isalpha(c));
 }
-*/
+ */
