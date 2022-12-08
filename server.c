@@ -6,7 +6,7 @@
 /*   By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:38:38 by antmoren          #+#    #+#             */
-/*   Updated: 2022/12/04 21:35:26 by antmoren         ###   ########.fr       */
+/*   Updated: 2022/12/06 22:13:50 by antmoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_handler(int signal)
 	static int	i;
 
 	if (signal == SIGUSR1)
-		i |= (0x01 << bit);
+		i |= (1 << bit);
 	bit++;
 	if (bit == 8)
 	{
@@ -35,14 +35,14 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (argc != 1)
 	{
-		ft_printf("\033[91mError: wrong format.\033[0m\n");
-		ft_printf("\033[33mTry: ./server\033[0m\n");
-		return (0);
+		ft_printf("Wrong format\n");
+		ft_printf("Try: ./server\n");
+		return (1);
 	}
 	pid = getpid();
-	ft_printf("\033[94mPID\033[0m \033[96m->\033[0m %d\n", pid);
-	ft_printf("\033[90mWaiting for a message...\033[0m\n");
-	while (argc == 1)
+	ft_printf("The PID is: %d\n", pid);
+	ft_printf("Waiting for a message...\n");
+	while (42)
 	{
 		signal(SIGUSR1, ft_handler);
 		signal(SIGUSR2, ft_handler);

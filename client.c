@@ -6,7 +6,7 @@
 /*   By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:38:44 by antmoren          #+#    #+#             */
-/*   Updated: 2022/12/04 21:30:57 by antmoren         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:24:28 by antmoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_send_bits(int pid, char i)
 	bit = 0;
 	while (bit < 8)
 	{
-		if ((i & (0x01 << bit)) != 0)
+		if ((i & (1 << bit)) != 0)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
@@ -46,8 +46,8 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		ft_printf("\033[91mError: wrong format.\033[0m\n");
-		ft_printf("\033[33mTry: ./client <PID> <MESSAGE>\033[0m\n");
+		ft_printf("Wrong format\n");
+		ft_printf("Try: ./client <PID> <TEXT>\n");
 		return (1);
 	}
 	return (0);
