@@ -6,11 +6,11 @@
 #    By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 16:38:41 by antmoren          #+#    #+#              #
-#    Updated: 2022/12/08 01:17:29 by antmoren         ###   ########.fr        #
+#    Updated: 2022/12/08 01:49:48 by antmoren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CLIENT 		= client
+NAME 		= client
 SERVER		= server
 FT_PRINTF	= ft_printf
 INC			= inc
@@ -41,17 +41,16 @@ start:
 			@cp $(FT_PRINTF)/ft_printf.a .
 			@make all
 
-all:		$(CLIENT) $(SERVER)
+all:		$(NAME) $(SERVER)
 
-$(CLIENT):	$(OBJCL) 
-			@$(CC) $(FLAGS) $(OBJCL) $(HEADER) ft_printf.a -o $(CLIENT)
+$(NAME):	$(OBJCL) 
+			@$(CC) $(FLAGS) $(OBJCL) $(HEADER) ft_printf.a -o $(NAME)
 
 $(SERVER):	$(OBJSV) 
 			@$(CC) $(FLAGS) $(OBJSV) $(HEADER) ft_printf.a -o $(SERVER)
 			@echo "$(GREEN)Server and client generated!$(DEF_COLOR)"
 
 %.o: %.c 
-			@echo "$(ORANGE)Compiling: $<$(DEF_COLOR)"
 			@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
 
 
@@ -61,8 +60,8 @@ clean:
 			@echo "$(GREEN)Object Files Cleaned!$(DEF_COLOR)\n"
 
 fclean:		clean
-			@$(RM) $(CLIENT) $(SERVER) $(OBJCL) $(OBJSV)
-			@$(RM) $(FT_PRINTF)/ft_printf.a
+			@$(RM) $(NAME) $(SERVER) $(OBJCL) $(OBJSV)
+			@make fclean -C $(FT_PRINTF)
 			@$(RM) ft_printf.a
 			@find . -name ".DS_Store" -delete
 			@echo "$(GREEN)All Files Cleaned!$(DEF_COLOR)\n"

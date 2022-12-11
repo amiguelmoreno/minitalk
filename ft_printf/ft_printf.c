@@ -6,7 +6,7 @@
 /*   By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 01:20:39 by antmoren          #+#    #+#             */
-/*   Updated: 2022/12/08 01:21:04 by antmoren         ###   ########.fr       */
+/*   Updated: 2022/12/08 01:35:14 by antmoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,5 @@ int	ft_printf(const char *str, ...)
 			print_length += ft_printchar(str[i]);
 		i++;
 	}
-	//va_end(args);
 	return (print_length);
 }
