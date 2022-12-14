@@ -17,17 +17,12 @@
 - [1 - Goal](#1---goal)
 - [2 - Analysing the subject](#2---analysing-the-subject)
 	- [2.1 - Requirements](#21---requirements)
-	- [2.2 - Note #1 - Display a string, not char by char](#22---note-1---display-a-string-not-char-by-char)
-	- [2.3 - Note #2 - Communication between server and client (two way channel)](#23---note-2---communication-between-server-and-client-two-way-channel)
+	- [2.2 - Communication between server and client (two way channel)](#22---communication-between-server-and-client-two-way-channel)
 - [3 - Implementation](#3---implementation)
 	- [3.1 - Allowed functions](#31---allowed-functions)
 		- [3.1.1 - Libft](#311---libft)
 		- [3.1.2 - Other functions](#312---other-functions)
-- [4 - Testing](#4---testing)
-	- [4.1 - Testers](#41---testers)
-	- [4.2 - Result](#42---result)
-- [5 - Demo](#5---demo)
-- [6 - Resources](#6---resources)
+- [4 - Resources](#4---resources)
 
 
 # 1 - Goal
@@ -233,7 +228,7 @@ DESCRIPTION
      EXIT_SUCCESS, and EXIT_FAILURE as possible values of status.
 ```
 
-# 5 - Resources
+# 4 - Resources
 - [Sending and Handling Signals in C (kill, signal, sigaction)](https://www.youtube.com/watch?v=83M5-NPDeWs)
 - [Communicating between processes using signals](https://www.youtube.com/watch?v=PErrlOx3LYE)
 - [Good reading about how to approach the project](https://github.com/mlanca-c/Minitalk/wiki)
