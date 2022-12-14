@@ -6,7 +6,7 @@
 #    By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 10:11:34 by antmoren          #+#    #+#              #
-#    Updated: 2022/12/04 22:07:47 by antmoren         ###   ########.fr        #
+#    Updated: 2022/12/14 14:15:22 by antmoren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,29 +41,27 @@ $(NAME): $(OBJ)
 	@cp libft/libft.a .
 	@mv libft.a $(NAME)
 	@$(AR) $(NAME) $(OBJ)
-	@echo "ft_printf compiled!"
+	@echo "\n 📚  ✅ ft_printf compiled!"
 
 
 %.o: %.c
-	@echo "Compiling: $<"
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 # clean rule
 clean: 
-	@$(RM) -rf *.o
+	@$(RM) ./*.o
 	@make clean -C $(LIBFT)
-	@echo "ft_printf object files cleaned!"
+	@echo "\n 🗑️  ✅ ft_printf executable files removed!"
 
 # fclean rule
 fclean: clean
-	@$(RM) -f $(NAME)
-	@$(RM) -f $(LIBFT)/libft.a
-	@echo "ft_printf executable files cleaned!"
-	@echo "libft executable files cleaned!"
+	@$(RM) $(NAME)
+	@make fclean -C $(LIBFT)
+	@echo "\n 🗑️  ✅ All ft_printf generated files removed!"
 
 # re rule
 re: fclean all
-	@echo "Cleaned and rebuilt everything for ft_printf!"
+	@echo "\n 🔄  ✅ Cleaned and rebuilt everything for ft_printf"
 
 # phony
 .PHONY: all clean fclean re

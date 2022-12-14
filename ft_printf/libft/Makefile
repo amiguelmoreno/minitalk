@@ -6,7 +6,7 @@
 #    By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 10:11:34 by antmoren          #+#    #+#              #
-#    Updated: 2022/11/18 14:31:55 by antmoren         ###   ########.fr        #
+#    Updated: 2022/12/14 14:03:23 by antmoren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,8 +81,9 @@ OBJS_BONUS	=	${SRCS_BONUS:.c=.o}
 
 
 $(NAME)	:	$(OBJS_MAND)
-			$(LIB1) $(NAME) $(OBJS_MAND)
-			$(LIB2) $(NAME)
+			@$(LIB1) $(NAME) $(OBJS_MAND)
+			@$(LIB2) $(NAME)
+			@echo "\n 📚  ✅ Libft compiled!"
 
 all: ${NAME}
 
@@ -92,22 +93,27 @@ all: ${NAME}
 #	-o <file>		Write output to <file>
 #	$< and $@		https://www.gnu.org/software/make/manual/make.html#Automatic-Variables
 %.o: %.c 
-	${CC} ${CFLAGS} -c $< -o $@
+	@${CC} ${CFLAGS} -c $< -o $@
 
 # Clean all the output files (*.o)
 clean: 
-	${RM} ${OBJS_MAND} ${OBJS_BONUS}
+	@${RM} ${OBJS_MAND} ${OBJS_BONUS}
+	@echo "\n 🗑️  ✅ Libft executable files removed!"
 
 # Clean all the output files (*.o) and the library file
 fclean: clean
-	${RM} ${NAME}
+	@${RM} ${NAME}
+	@echo "\n 🗑️  ✅ All libft generated files removed!"
 
 
 # Clean object files (*.o) and the binary file; 
 re: fclean all
+	@echo "\n 🔄  ✅ Cleaned and rebuilt everything for libft"
 
 bonus	:	$(OBJS_BONUS)
 			@make OBJS_MAND="$(OBJS_MAND) $(OBJS_BONUS)" $(NAME)
+			@echo "\n 📚  ✅ Libft BONUS compiled!"
+
 
 .PHONY:	all bonus clean fclean re
 
