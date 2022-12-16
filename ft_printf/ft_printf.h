@@ -6,14 +6,14 @@
 /*   By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 01:20:32 by antmoren          #+#    #+#             */
-/*   Updated: 2022/12/08 01:21:06 by antmoren         ###   ########.fr       */
+/*   Updated: 2022/12/16 13:20:23 by antmoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "./Libft/libft.h"
+# include "./libft/libft.h"
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>

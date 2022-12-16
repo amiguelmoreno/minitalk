@@ -6,11 +6,12 @@
 #    By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 16:38:41 by antmoren          #+#    #+#              #
-#    Updated: 2022/12/14 14:22:47 by antmoren         ###   ########.fr        #
+#    Updated: 2022/12/16 13:23:07 by antmoren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= client
+NAME		= ft_printf.a
+CLIENT 		= client
 SERVER		= server
 FT_PRINTF	= ft_printf
 INC			= inc
@@ -25,23 +26,22 @@ SRCSV_FILES	=	server.c
 OBJCL 		= 	$(SRCCL_FILES:.c=.o)
 OBJSV 		= 	$(SRCSV_FILES:.c=.o)
 
-start:
+$(NAME):
 			@make -C $(FT_PRINTF)
-			@cp $(FT_PRINTF)/ft_printf.a .
+			@cp $(FT_PRINTF)/$(NAME) .
 			@make all
 
-all:		$(NAME) $(SERVER)
+all:		$(NAME) $(CLIENT) $(SERVER)
 
-$(NAME):	$(OBJCL) 
-			@$(CC) $(FLAGS) $(OBJCL) $(HEADER) ft_printf.a -o $(NAME)
+$(CLIENT):	$(OBJCL) 
+			@$(CC) $(FLAGS) $(OBJCL) $(HEADER) $(NAME) -o $(CLIENT)
 
 $(SERVER):	$(OBJSV) 
-			@$(CC) $(FLAGS) $(OBJSV) $(HEADER) ft_printf.a -o $(SERVER)
+			@$(CC) $(FLAGS) $(OBJSV) $(HEADER) $(NAME) -o $(SERVER)
 			@echo "\n 📚  ✅ Server and client generated!"
 
 %.o: %.c 
 			@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
-
 
 clean:
 			@$(RM) -rf ./*.o
@@ -49,7 +49,7 @@ clean:
 			@echo "\n 🗑️  ✅ minitalk executable files removed!"
 
 fclean:		clean
-			@$(RM) $(NAME) $(SERVER) $(OBJCL) $(OBJSV)
+			@$(RM) $(CLIENT) $(SERVER) $(OBJCL) $(OBJSV)
 			@make fclean -C $(FT_PRINTF)
 			@$(RM) ft_printf.a
 			@find . -name ".DS_Store" -delete

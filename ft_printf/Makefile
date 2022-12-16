@@ -6,7 +6,7 @@
 #    By: antmoren <antmoren@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 10:11:34 by antmoren          #+#    #+#              #
-#    Updated: 2022/12/14 14:15:22 by antmoren         ###   ########.fr        #
+#    Updated: 2022/12/16 13:34:18 by antmoren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME = ft_printf.a
 # Flags
 CC 		= gcc 
 INC 	= include
-LIBFT	= Libft
+LIBFT	= libft
 CFLAGS 	= -Wall -Wextra -Werror
 AR 		= ar rcs
 
